@@ -1,0 +1,36 @@
+version: "3"
+services:    
+  angular-service:
+    image: hmsara/front:1.1
+    ports:
+      - "4300:80"
+    networks:
+      - net-mysql
+
+  spring-service:
+    image: hmsara/back:1.2
+    restart: always
+    ports:
+      - "8089:8089"
+    networks:
+      - net-mysql
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/achatdb
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysqldb
+ 
+  mysqldb:
+    image: mysql:8
+    networks:
+      - net-mysql
+    environment:
+      - MYSQL_HOST=mysqldb
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=achatdb
+      - MYSQL_USERNAME=root
+
+networks:
+  net-mysql: 
+   
