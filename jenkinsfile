@@ -11,7 +11,7 @@ stages{
     stage('Build Frontend'){
         steps{
             script{
-                sh ' npm intall '
+                
                 sh 'docker build -t hmsara/front_image .'
                
             }
