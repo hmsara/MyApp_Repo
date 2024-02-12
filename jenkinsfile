@@ -4,7 +4,7 @@ stages{
     stage('Build Frontend'){
         steps{
             script{
-                sh 'cd Achat/front '
+               // sh 'cd Achat/front '
                 sh 'docker build -t hmsara/front_image .'
                
             }
