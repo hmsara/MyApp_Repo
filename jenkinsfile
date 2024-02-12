@@ -4,10 +4,15 @@ environment {
         DOCKER_TLS_VERIFY = '0'
     }
 stages{
+    stage('checkout scm'){
+        steps{
+            script{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hmsara/MyApp_Repo']])}}}}
+stages{
     stage('Build Frontend'){
         steps{
             script{
-               // sh 'cd Achat/front '
+                sh ' npm intall '
                 sh 'docker build -t hmsara/front_image .'
                
             }
