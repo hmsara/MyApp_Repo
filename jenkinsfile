@@ -12,7 +12,7 @@ stages{
         steps{
             script{
                 
-                sh 'docker build -t hmsara/front_image .'
+                sh 'docker build -t hmsara/front_image . '
                
             }
         }
