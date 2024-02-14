@@ -1,5 +1,10 @@
 pipeline{
-agent any
+agent {
+  docker {
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+    }
+}
 environment {
         DOCKER_TLS_VERIFY = '0'
     }
@@ -8,16 +13,25 @@ stages{
         steps{
             script{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hmsara/MyApp_Repo']])}}}
-    stage('Build Frontend'){
-        steps{
-            script{
-                
-                sh 'docker build -t hmsara/front_image . '
-               
+
+     stage('Build Frontend'){
+
+         environment {
+           DOCKER_IMAGE = "hmsara/front_image:${BUILD_NUMBER}"
+           REGISTRY_CREDENTIALS = credentials('docker-cred')
+         }
+
+          steps {
+            script {
+              sh 'cd Achat\front && docker build -t ${DOCKER_IMAGE} .'
+              def dockerImage = docker.image("${DOCKER_IMAGE}")
+              docker.withRegistry('https://hub.docker.com/repositories/hmsara', "docker-cred") {
+                dockerImage.push()
             }
         }
-
+      }
     }
+     
      
 
 }
