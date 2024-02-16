@@ -3,8 +3,7 @@ agent any
 
 environment {
         DOCKER_TLS_VERIFY = '0'
-        DOCKER_ID = credentials('DOCKER_ID')
-        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+        Docker_Password = credentials('Docker_Password')
     }
 stages{
     stage('checkout scm'){
@@ -16,7 +15,7 @@ stages{
 
          environment {
            DOCKER_IMAGE = "hmsara/front_image:${BUILD_NUMBER}"
-           REGISTRY_CREDENTIALS = credentials('DOCKER_PASSWORD')
+           REGISTRY_CREDENTIALS = credentials('Docker_Password')
          }
 
           steps {
