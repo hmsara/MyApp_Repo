@@ -11,24 +11,39 @@ stages{
             script{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hmsara/MyApp_Repo']])}}}
 
-     stage('Build Frontend'){
+     stage('Build Frontend') {
+            environment {
+                DOCKER_IMAGE = "hmsara/front_image:${BUILD_NUMBER}"
+                REGISTRY_CREDENTIALS = credentials('Docker_Password')
+            }
 
-         environment {
-           DOCKER_IMAGE = "hmsara/front_image:${BUILD_NUMBER}"
-           REGISTRY_CREDENTIALS = credentials('Docker_Password')
-         }
-
-          steps {
-            script {
-              sh 'cd Achat\front && docker build -t ${DOCKER_IMAGE} .'
-              def dockerImage = docker.image("${DOCKER_IMAGE}")
-              docker.withRegistry('https://hub.docker.com/repositories/hmsara', "docker-cred") {
-                dockerImage.push()
+            steps {
+                script {
+                    sh 'docker build -t ${DOCKER_IMAGE} .'
+                }
             }
         }
-      }
-    }
-     
+
+        stage('Push to Docker Registry') {
+            steps {
+                script {
+                    def dockerImage = docker.image("${DOCKER_IMAGE}")
+                    docker.withRegistry('https://hub.docker.com/repositories/hmsara', "docker-cred") {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
+        stage('Cleanup') {
+             steps {
+                echo 'Cleaning..'
+                echo 'Running docker rmi..'
+                echo 'Removing unused docker images..'
+                // keep intermediate images as cache, only delete the final image
+               // sh 'docker images -q | xargs --no-run-if-empty docker rmi'
+             }
+         } 
      
 
 }
