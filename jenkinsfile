@@ -3,7 +3,9 @@ agent any
 
 environment {
         DOCKER_TLS_VERIFY = '0'
-        Docker_Password = credentials('Docker_Password')
+        REGISTRY_CREDENTIALS = credentials('Docker_Password')
+        DockerImage=''
+        regitry='hmsara/frontImage'
     }
 stages{
     stage('Initialize') {
@@ -20,38 +22,15 @@ stages{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hmsara/MyApp_Repo']])}}}
 
      stage('Build Frontend') {
-            environment {
-                DOCKER_IMAGE = "hmsara/front_image:${BUILD_NUMBER}"
-                REGISTRY_CREDENTIALS = credentials('Docker_Password')
-            }
 
             steps {
                 script {
-                    sh 'docker build -t ${DOCKER_IMAGE} .'
+                    DockerImage=docker.build registry
                 }
             }
         }
 
-        stage('Push to Docker Registry') {
-            steps {
-                script {
-                    def dockerImage = docker.image("${DOCKER_IMAGE}")
-                    docker.withRegistry('https://hub.docker.com/repositories/hmsara', "docker-cred") {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
 
-        stage('Cleanup') {
-             steps {
-                echo 'Cleaning..'
-                echo 'Running docker rmi..'
-                echo 'Removing unused docker images..'
-                // keep intermediate images as cache, only delete the final image
-               // sh 'docker images -q | xargs --no-run-if-empty docker rmi'
-             }
-         } 
      
 
 }
