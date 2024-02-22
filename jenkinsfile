@@ -3,7 +3,7 @@ agent any
 
 environment {
         DOCKER_TLS_VERIFY = '0'
-       // REGISTRY_CREDENTIALS = credentials('Docker_Password')
+        REGISTRY_CREDENTIALS = credentials('Docker_Password')
         DockerImage=''
         registry='hmsara/frontimage'
     }
