@@ -6,6 +6,7 @@ environment {
         DOCKER_TLS_VERIFY = '0' 
         DockerImage=''
         registry='hmsara/backimage'
+        frontimage='hmsara/frontimage '
         //DOCKER_IMAGE = "hmsara/back_image:${BUILD_NUMBER}"
         DOCKER_REGISTRY = 'https://hub.docker.com/repositories/hmsara'
         DOCKER_PASSWORD = credentials('dockerpwd')
@@ -23,6 +24,19 @@ stages{
                 script {
                     env.DOCKER_TLS_VERIFY = DOCKER_TLS_VERIFY
                     DockerImage=docker.build (registry)
+                }
+            }
+        }
+
+      stage('Build Frontend') {
+
+            steps {
+                script {
+                    env.DOCKER_TLS_VERIFY = DOCKER_TLS_VERIFY
+                    sh """ 
+                      cd Achat/front 
+                      DockerImagefront=docker.build (frontimage)
+                    """
                 }
             }
         }
