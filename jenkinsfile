@@ -7,7 +7,7 @@ environment {
         DockerImage=''
         registry='hmsara/backimage'
         //DOCKER_IMAGE = "hmsara/back_image:${BUILD_NUMBER}"
-        DOCKER_REGISTRY = 'https://hub.docker.com'
+        DOCKER_REGISTRY = 'https://hub.docker.com/repositories/hmsara'
         DOCKER_PASSWORD = credentials('Docker_Password')
     }
 stages{
@@ -32,7 +32,7 @@ stages{
                 script {
                   withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
                       sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
-                      withDockerRegistry(url: 'https://hub.docker.com/) {
+                      withDockerRegistry(url: 'https://hub.docker.com/repositories/hmsara'){
                          sh "docker push ${DOCKER_REGISTRY}/${registry}"
                 }
             }
