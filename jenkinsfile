@@ -33,7 +33,7 @@ stages{
             steps {
                 script {
                    dir(path: 'front') {
-                    DockerImagefront=docker.build (frontimage)
+                   sh ' DockerImagefront=docker.build (frontimage)'
                     
                 }
             }
