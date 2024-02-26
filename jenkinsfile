@@ -32,7 +32,7 @@ stages{
 
             steps {
                 script {
-                   dir(path: 'MyApp_Repo/front') {
+                   dir(path: 'front') {
                    sh ' DockerImagefront=docker.build frontimage'
                     
                 }
