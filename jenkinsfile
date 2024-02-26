@@ -32,7 +32,7 @@ stages{
                 script {
                     //def dockerImage = docker.image("${DOCKER_IMAGE}")
                     withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASSWORD')]){
-                    //sh ' echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
+                    sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
                     //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "DOCKER_PASSWORD") 
                     // registry.push()
                     registry.withRegistry("${DOCKER_REGISTRY}", "DOCKER_PASSWORD") {
