@@ -24,7 +24,16 @@ stages{
             }
         }
 
-
+    stage('Push to Docker Registry') {
+            steps {
+                script {
+                    def dockerImage = docker.image("${DOCKER_IMAGE}")
+                    docker.withRegistry('https://hub.docker.com/repositories/hmsara', "docker-cred") {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
      
 
 }
