@@ -34,7 +34,7 @@ stages{
                 script {
                     env.DOCKER_TLS_VERIFY = DOCKER_TLS_VERIFY
                     sh """ 
-                      cd ./Achat/front 
+                      cd /front 
                       DockerImagefront=docker.build (frontimage)
                     """
                 }
