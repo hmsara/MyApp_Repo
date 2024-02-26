@@ -30,25 +30,12 @@ stages{
     stage('Push to Docker Registry') {
             steps {
                 script {
-                  withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]){
-                     sh "echo ${dockerpwd} | docker login -u hmsara --password-stdin ${dockerpwd}"
-                      }
-                         sh "docker push hmsara/backimage"
-                
-            }
-                    //def dockerImage = docker.image("${DOCKER_IMAGE}")
-                   // withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
-                    //sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
-                    //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "Docker_Password") 
-                    // registry.push()
-                    // withDockerRegistry(url: 'https://hub.docker.com/repositories/hmsara') { 
-                         //   sh "docker push ${DOCKER_REGISTRY}/${registry}"
-                  //  }
-               // }
-            }
-        }
-     
-
+                  withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
+                     sh " docker login -u hmsara --password-stdin ${dockerpwd}"
+}
+                     sh "docker push hmsara/backimage"
+}
 }
 }
 
+}}
