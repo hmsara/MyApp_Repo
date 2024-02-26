@@ -31,10 +31,10 @@ stages{
             steps {
                 script {
                   withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
-                     sh "echo ${DOCKER_PASSWORD} | docker login -u _ --password-stdin ${DOCKER_REGISTRY}"
-                      withDockerRegistry(url: 'https://hub.docker.com/repositories/hmsara'){
-                         sh "docker push ${DOCKER_REGISTRY}/${registry}"
-                }
+                     sh "echo ${DOCKER_PASSWORD} | docker login -u hmsara --password-stdin ${Docker_Password}"
+                      }
+                         sh "docker push hmsara/backimage"
+                
             }
                     //def dockerImage = docker.image("${DOCKER_IMAGE}")
                    // withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
