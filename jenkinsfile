@@ -30,7 +30,7 @@ stages{
             steps {
                 script {
                     def dockerImage = docker.image("${DOCKER_IMAGE}")
-                    docker.withRegistry('https://hub.docker.com/repositories/hmsara', "docker-cred") {
+                    docker.withRegistry('https://hub.docker.com/repositories/hmsara', "DOCKER_PASSWORD") {
                         dockerImage.push()
                     }
                 }
