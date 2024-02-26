@@ -6,7 +6,8 @@ environment {
         DOCKER_TLS_VERIFY = '0' 
         DockerImage=''
         registry='hmsara/backimage'
-        DOCKER_IMAGE = "hmsara/back_image:${BUILD_NUMBER}"
+        //DOCKER_IMAGE = "hmsara/back_image:${BUILD_NUMBER}"
+        DOCKER_REGISTRY = 'https://hub.docker.com/repositories/hmsara'
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
     }
 stages{
@@ -33,7 +34,11 @@ stages{
                     withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASSWORD')]){
                     //sh ' echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
                     //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "DOCKER_PASSWORD") 
-                     registry.push()
+                    // registry.push()
+                    registry.withRegistry("${DOCKER_REGISTRY}", "docker-cred") {
+                            // Push the Docker image to the registry
+                            // Replace 'your_image_name' with the actual image name
+                            sh "docker push ${DOCKER_REGISTRY}/${registry}"
                     }
                 }
             }
