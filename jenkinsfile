@@ -31,7 +31,7 @@ stages{
             steps {
                 script {
                   withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
-                      sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
+                     sh "echo ${DOCKER_PASSWORD} | docker login -u _ --password-stdin ${DOCKER_REGISTRY}"
                       withDockerRegistry(url: 'https://hub.docker.com/repositories/hmsara'){
                          sh "docker push ${DOCKER_REGISTRY}/${registry}"
                 }
