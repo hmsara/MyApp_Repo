@@ -5,7 +5,7 @@ environment {
        
         DOCKER_TLS_VERIFY = '0' 
         DockerImage=''
-        registry='hmsara/frontimage'
+        registry='hmsara/backimage'
     }
 stages{
     
@@ -14,7 +14,7 @@ stages{
             script{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hmsara/MyApp_Repo']])}}}
 
-     stage('Build Frontend') {
+     stage('Build Backend') {
 
             steps {
                 script {
