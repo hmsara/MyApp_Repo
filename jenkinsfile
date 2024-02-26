@@ -6,6 +6,7 @@ environment {
         DOCKER_TLS_VERIFY = '0' 
         DockerImage=''
         registry='hmsara/backimage'
+        DOCKER_IMAGE = "hmsara/backimage
         Docker_Password = credentials('Docker_Password')
     }
 stages{
