@@ -32,7 +32,7 @@ stages{
                 script {
                   withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
                       sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
-                      withDockerRegistry(url: "${DOCKER_REGISTRY}") {
+                      withDockerRegistry(url: 'https://hub.docker.com/) {
                          sh "docker push ${DOCKER_REGISTRY}/${registry}"
                 }
             }
