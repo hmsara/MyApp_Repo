@@ -7,7 +7,7 @@ environment {
         DockerImage=''
         registry='hmsara/backimage'
         //DOCKER_IMAGE = "hmsara/back_image:${BUILD_NUMBER}"
-        DOCKER_REGISTRY = 'https://hub.docker.com/repositories'
+        DOCKER_REGISTRY = 'https://hub.docker.com'
         DOCKER_PASSWORD = credentials('Docker_Password')
     }
 stages{
