@@ -35,9 +35,7 @@ stages{
                     sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
                     //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "DOCKER_PASSWORD") 
                     // registry.push()
-                    registry.withRegistry("${DOCKER_REGISTRY}", "DOCKER_PASSWORD") {
-                            // Push the Docker image to the registry
-                            // Replace 'your_image_name' with the actual image name
+                     withDockerRegistry(url: 'https://hub.docker.com/repositories/hmsara') { 
                             sh "docker push ${DOCKER_REGISTRY}/${registry}"
                     }
                 }
