@@ -8,7 +8,7 @@ environment {
         registry='hmsara/backimage'
         //DOCKER_IMAGE = "hmsara/back_image:${BUILD_NUMBER}"
         DOCKER_REGISTRY = 'https://hub.docker.com/repositories'
-        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+        DOCKER_PASSWORD = credentials('Docker_Password')
     }
 stages{
     
@@ -30,16 +30,16 @@ stages{
     stage('Push to Docker Registry') {
             steps {
                 script {
-                  withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASSWORD')]){
+                  withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
                       sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
                       withDockerRegistry(url: "${DOCKER_REGISTRY}") {
                          sh "docker push ${DOCKER_REGISTRY}/${registry}"
                 }
             }
                     //def dockerImage = docker.image("${DOCKER_IMAGE}")
-                   // withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASSWORD')]){
+                   // withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]){
                     //sh "docker login -u _ -p ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
-                    //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "DOCKER_PASSWORD") 
+                    //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "Docker_Password") 
                     // registry.push()
                     // withDockerRegistry(url: 'https://hub.docker.com/repositories/hmsara') { 
                          //   sh "docker push ${DOCKER_REGISTRY}/${registry}"
