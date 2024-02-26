@@ -29,7 +29,7 @@ stages{
     stage('Push to Docker Registry') {
             steps {
                 script {
-                    def dockerImage = docker.image("${DOCKER_IMAGE}")
+                    //def dockerImage = docker.image("${DOCKER_IMAGE}")
                     withCredentials([string(credentialsId: 'DOCKER_PASSWORD', variable: 'DOCKER_PASSWORD')]){
                     //sh ' echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
                     //docker.withRegistry('https://hub.docker.com/repositories/hmsara', "DOCKER_PASSWORD") 
