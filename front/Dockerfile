@@ -3,7 +3,7 @@ FROM node:14
 RUN mkdir -p /app
 
 WORKDIR /app
-RUN ls -al
+RUN npm install -g @angular/cli
 COPY  ["front/package.json", "front/package-lock.json", "./"]
 RUN npm install --legacy-peer-deps
 RUN npm audit fix
