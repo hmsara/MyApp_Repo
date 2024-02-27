@@ -8,8 +8,8 @@ COPY  ["front/package.json", "front/package-lock.json", "./"]
 RUN npm install --legacy-peer-deps
 RUN npm audit fix
 
-RUN ng update @angular/cli --migrate-only --from=12.0.1 
 COPY . /app
+RUN ng update @angular/cli --migrate-only --from=12.0.1 
 ARG configuration=production
 RUN npm run ng build -- --output-path=dist  --verbose
 
