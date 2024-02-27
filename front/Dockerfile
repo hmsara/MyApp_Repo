@@ -10,7 +10,7 @@ RUN npm audit fix
 
 COPY . /app
 ARG configuration=production
-RUN npm run ng build -- --output-path=dist/crudtuto-Front  --verbose
+RUN npm run ng build -- --output-path=dist  --verbose
 
 #final stage 
 FROM  nginx:latest
