@@ -33,8 +33,7 @@ stages{
 
             steps {
                 script {
-                     sh 'apt install -y nodejs npm'
-
+                     sh 'npm install'
                      docker.build("hmsara/frontimage:latest", "--file front/Dockerfile .")
 
                    
