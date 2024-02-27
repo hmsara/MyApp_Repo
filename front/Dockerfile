@@ -9,6 +9,7 @@ RUN npm install --legacy-peer-deps
 RUN npm audit fix
 
 COPY . /app
+RUN npm list -g angular-cli
 ARG configuration=production
 RUN npm run ng build -- --output-path=dist  --verbose
 
