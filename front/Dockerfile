@@ -4,7 +4,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 RUN ls -al
-COPY  ["package.json", "package-lock.json", "./"]
+COPY  ["front/package.json", "front/package-lock.json", "./"]
 RUN npm install --legacy-peer-deps
 
 COPY . /app
