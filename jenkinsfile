@@ -34,7 +34,7 @@ stages{
             steps {
                 script {
                
-                     docker.build("frontimage:latest", "--file front/Dockerfile .")
+                     docker.build("hmsara/frontimage:latest", "--file front/Dockerfile .")
 
                    
                     
