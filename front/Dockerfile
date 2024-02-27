@@ -3,7 +3,7 @@ FROM node:14
 RUN mkdir -p /app
 
 WORKDIR /app
-
+RUN ls -al
 COPY  ["package.json", "package-lock.json", "./"]
 RUN npm install --legacy-peer-deps
 
