@@ -2,13 +2,13 @@
 FROM node:14 
 RUN mkdir -p /app
 
-WORKDIR /app
+WORKDIR /app/front
 RUN npm install -g @angular/cli@12.0.1
 COPY  ["front/package.json", "front/package-lock.json", "./"]
 RUN npm install --legacy-peer-deps
 RUN npm audit fix
 
-COPY . /app
+COPY . /app/front
 ARG configuration=production
 RUN npm run ng build -- --prod --output-path=dist  --verbose
 
