@@ -26,6 +26,6 @@ RUN npm run ng build -- --output-path=dist  --verbose
 #FROM  nginx:latest
 #COPY --from=0 /app/dist/ /usr/share/nginx/html
 
-Expose port 80
+EXPOSE port 80
 EXPOSE 4300
 # CMD nginx -g "daemon off;"
