@@ -8,6 +8,7 @@ COPY front/angular.json ./
 COPY ["front/tsconfig.app.json", "/app/front/"]
 COPY ["front/tsconfig.json", "/app/front/"]
 COPY ["front/src/environments/environment.prod.ts", "/app/front/src/environments/"]
+COPY ["front/src/environments/environment.ts", "/app/front/src/environments/"]
 
 
 COPY . /app/front
