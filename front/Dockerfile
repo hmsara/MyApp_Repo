@@ -11,7 +11,7 @@ RUN npm install -g @angular/cli@12.0.1
 
 COPY . /app/front
 ARG configuration=production
-RUN npm run ng build -- --prod --output-path=dist  --verbose
+RUN npm run ng build -- --output-path=dist  --verbose
 
 #final stage 
 FROM  nginx:latest
