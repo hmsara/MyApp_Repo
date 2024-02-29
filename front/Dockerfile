@@ -23,9 +23,9 @@ ARG configuration=production
 RUN npm run ng build -- --output-path=dist  --verbose
 
 #final stage 
-FROM  nginx:latest
-COPY --from=0 /app/dist/ /usr/share/nginx/html
+#FROM  nginx:latest
+#COPY --from=0 /app/dist/ /usr/share/nginx/html
 
-# Expose port 80
-# EXPOSE 4300
+Expose port 80
+EXPOSE 4300
 # CMD nginx -g "daemon off;"
