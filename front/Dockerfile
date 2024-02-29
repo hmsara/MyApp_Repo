@@ -6,6 +6,8 @@ WORKDIR /app/front
 COPY  ["front/package.json", "front/package-lock.json", "./"]
 COPY front/angular.json ./
 COPY ["front/tsconfig.app.json", "/app/front/"]
+COPY ["front/tsconfig.json", "/app/front/"]
+
 COPY . /app/front
 RUN npm install --legacy-peer-deps
 RUN npm audit fix
