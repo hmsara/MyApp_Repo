@@ -49,6 +49,7 @@ stages{
                      sh " docker login -u hmsara -p ${dockerpwd}"
 }
                      sh "docker push hmsara/backimage"
+                     sh "docker push hmsara/frontimage"
 }
 }
 }
