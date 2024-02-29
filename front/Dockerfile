@@ -6,7 +6,7 @@ WORKDIR /app/front
 COPY  ["front/package.json", "front/package-lock.json", "./"]
 COPY front/angular.json ./
 
-COPY front/* /app/front
+COPY front /app
 RUN echo $(pwd )
 RUN echo $(ls )
 COPY front/tsconfig.app.json /app/front/
