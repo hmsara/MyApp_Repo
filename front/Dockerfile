@@ -7,7 +7,8 @@ COPY  ["front/package.json", "front/package-lock.json", "./"]
 COPY front/angular.json ./
 
 COPY . /app/front
-RUN echo $(ls -l /app/front)
+RUN echo $(pwd )
+RUN echo $(ls )
 COPY front/tsconfig.app.json /app/front/
 
 
