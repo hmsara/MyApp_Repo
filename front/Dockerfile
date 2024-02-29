@@ -5,13 +5,11 @@ RUN mkdir -p /app
 WORKDIR /app/front
 COPY  ["front/package.json", "front/package-lock.json", "./"]
 COPY front/angular.json ./
-COPY ["front/tsconfig.app.json", "/app/front/"]
-COPY ["front/tsconfig.json", "/app/front/"]
-COPY ["front/src/environments/environment.prod.ts", "/app/front/src/environments/"]
-COPY ["front/src/environments/environment.ts", "/app/front/src/environments/"]
-
 
 COPY . /app/front
+
+
+
 RUN npm install --legacy-peer-deps
 RUN npm audit fix
 RUN npm install -g @angular/cli@12.0.1
