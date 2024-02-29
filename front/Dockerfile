@@ -6,13 +6,13 @@ WORKDIR /app/front
 COPY  ["front/package.json", "front/package-lock.json", "./"]
 COPY front/angular.json ./
 COPY ["front/tsconfig.app.json", "/app/front/"]
-
+COPY . /app/front
 RUN npm install --legacy-peer-deps
 RUN npm audit fix
 RUN npm install -g @angular/cli@12.0.1
 
 
-COPY . /app/front
+
 ARG configuration=production
 RUN npm run ng build -- --output-path=dist  --verbose
 
