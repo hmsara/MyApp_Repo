@@ -36,9 +36,6 @@ stages{
                      sh " ls "
                      docker.build("hmsara/frontimage:latest", "--file front/Dockerfile .")
 
-                   
-                    
-                
             }
         }}
 
@@ -50,9 +47,7 @@ stages{
 }
                      sh "docker push hmsara/backimage"
                      sh "docker push hmsara/frontimage"
-}
-}
-}
+}}}
 stage('Update Deployment File') {
             environment {
                 GIT_REPO_NAME = "GitOps_Repo" 
@@ -64,6 +59,7 @@ stage('Update Deployment File') {
                      sh '''
                          git config user.email "${GIT_USER_EMAIL}"
                          git config user.name "${GIT_USER_NAME}"
+                         ls -l 
                          OLD_BUILD_NUMBER=$((${BUILD_NUMBER}-1))
                          sed -i "s/${OLD_BUILD_NUMBER}/${BUILD_NUMBER}/g" front-deployment.yaml
                          git add front-deployment.yaml
