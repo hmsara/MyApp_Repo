@@ -1,0 +1,21 @@
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular
+  namespace: default 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      name: angular
+      labels:
+        app: angular
+    spec:
+      containers:
+      - name: angular
+        image: hmsara/front:1.2
+        imagePullPolicy: Always
