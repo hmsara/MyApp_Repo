@@ -56,8 +56,13 @@ stage('Update Deployment File') {
             }
             steps {
                 withCredentials([string(credentialsId: 'gitpwd', variable: 'gitpwd')]) {
+                     // Clone the GitOps repository to a temporary directory
+                        dir('tmp_gitops_repo') {
+                            git branch: 'main',
+                                credentialsId: 'gitpwd',
+                                url: 'https://github.com/hmsara/GitOps_Repo'
                      sh '''
-                         cd /hmsara/GitOps_Repo
+                         
                          git config user.email "${GIT_USER_EMAIL}"
                          git config user.name "${GIT_USER_NAME}"
                          ls -l 
