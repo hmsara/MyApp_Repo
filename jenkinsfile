@@ -53,5 +53,24 @@ stages{
 }
 }
 }
-
+stage('Update Deployment File') {
+            environment {
+                GIT_REPO_NAME = "GitOps_Repo" 
+                GIT_USER_NAME = "hmsara"   
+                GIT_PASSWORD = credentials('gitpwd')
+            }
+            steps {
+                withCredentials([string(credentialsId: 'gitpwd', variable: 'gitpwd')]) {
+                     sh '''
+                         git config user.email "${GIT_USER_EMAIL}"
+                         git config user.name "${GIT_USER_NAME}"
+                         OLD_BUILD_NUMBER=$((${BUILD_NUMBER}-1))
+                         sed -i "s/${OLD_BUILD_NUMBER}/${BUILD_NUMBER}/g" front-deployment.yaml
+                         git add front-deployment.yaml
+                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                         echo "Pushing changes to GitHub..."
+                        git push https://${GIT_USER_NAME}:${GIT_PASSWORD}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+        '''
+                }
+}}
 }}
