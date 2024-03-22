@@ -62,7 +62,7 @@ stage('Update Deployment File') {
                                 credentialsId: 'gitpwd',
                                 url: 'https://github.com/hmsara/GitOps_Repo'}
                      sh '''
-                         
+                         cd tmp_gitops_repo
                          git config user.email "${GIT_USER_EMAIL}"
                          git config user.name "${GIT_USER_NAME}"
                          ls -l 
